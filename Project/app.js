@@ -1,13 +1,14 @@
 
 const express = require('express');
 const mongoose = require('mongoose');
+import MONGODB from './mongodb';
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 
 mongoose
-.connect('mongodb://localhost:27017/products', {useNewUrlParser: true})
+.connect(MONGODB, {useNewUrlParser: true})
 .then(()=>{console.log('Successfully connected')})
 .catch((error)=>{('This is an error')});
 
@@ -20,7 +21,7 @@ app.use(session({
       secret: 'keyboard cat',
       resave: false,
       saveUninitialized: false,
-      cookie: { secure: true, maxAge: 1000 * 60 * 60 * 24 }
+      // cookie: { secure: true, maxAge: 1000 * 60 * 60 * 24 }
 }))
 
 app.use(logger('dev'));
